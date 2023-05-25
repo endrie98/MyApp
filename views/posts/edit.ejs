@@ -1,0 +1,57 @@
+<% layout('layouts/boilerplate')%>
+<h1 class="text-center">Edit Post</h1>
+<div class="col-6 offset-3">
+    <form action="/posts/<%= post._id %>?_method=PUT" method="POST" novalidate class="validated-form" enctype="multipart/form-data">
+        <div class="mb-3">
+            <label class="form-label" for="title">Title</label>
+            <input class="form-control" type="text" id="title" name="post[title]" required
+            value="<%= post.title %>">
+            <div class="valid-feedback">
+                Looks good!
+            </div>
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="title">Description</label>
+            <input class="form-control" type="text" id="title" name="post[description]" required
+            value="<%= post.description %>">
+            <div class="valid-feedback">
+                Looks good!
+            </div>
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="title">Location</label>
+            <input class="form-control" type="text" id="title" name="post[location]" required
+            value="<%= post.location %>">
+            <div class="valid-feedback">
+                Looks good!
+            </div>
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="title">Lucky Number</label>
+            <input class="form-control" type="number" id="title" name="post[lucky]" required
+            value="<%= post.lucky %>">
+            <div class="valid-feedback">
+                Looks good!
+            </div>
+        </div>
+        <div class="mb-3">
+            <div class="form-file custom-file">
+                <input type="file" class="form-file-input" id="image" name="image" multiple>
+                <label class="form-file-label" for="image">
+                    <span class="form-file-text custom-file-label">Add more image(s)...</span>
+                    <span class="form-file-button">Browse</span>
+                </label>
+            </div>
+        </div>
+        <div class="mb-3">
+            <% post.images.forEach(function(img, i) {  %>
+            <img src="<%=img.thumbnail %>" class="img-thumbnail" alt="">
+            <div class="form-check-inline">
+                <input type="checkbox" id="image-<%=i%>" name="deleteImages[]" value="<%=img.filename%>">
+            </div>
+            <label for="image-<%=i%>">Delete?</label>
+            <% })%>
+        </div>
+        <button class="btn btn-info mb-3">Update Post</button>
+    </form>
+</div>
